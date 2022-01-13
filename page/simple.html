@@ -29,9 +29,7 @@
       window.onload = async () => {
         const pagUrl = '../assets/like.pag';
         // Initialize pag webassembly module.
-        const PAG = await window.libpag.PAGInit({
-          locateFile: (file) => '../lib/' + file,
-        });
+        const PAG = await window.libpag.PAGInit();
         // Fetch pag file.
         const fileBlob = await fetch(pagUrl).then((response) => response.blob());
         const file = new window.File([fileBlob], pagUrl.replace(/(.*\/)*([^.]+)/i, '$2'));
