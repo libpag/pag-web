@@ -1,16 +1,13 @@
 {
   "name": "pag-web",
   "version": "1.0.0",
-  "description": "pag web demo",
+  "description": "The repository store some libpag web demo.",
   "main": "index.html",
-  "scripts": {
-    "start": "http-server -p 8080 ."
-  },
   "keywords": [
     "pag"
   ],
   "author": "zenoslin",
   "devDependencies": {
-    "http-server": "^14.1.0"
+    "gh-pages": "^3.2.3"
   }
 }
