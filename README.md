@@ -6,7 +6,7 @@ You can find more doc [here](https://github.com/Tencent/libpag/web).
 
 ## start
 
-Make sure [Node](https://nodejs.org/) is installed.
+Make sure [Node](https://nodejs.org/) (version >= 12) is installed.
 
 ```bash
 $ npm install
