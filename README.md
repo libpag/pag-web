@@ -6,13 +6,13 @@ The repository store some libpag web demo.
 
 ## Demo Code
 
-- [Simple](./page/simple.html) - A simple demo to play pag file.
-- [Multiple](./page/multiple.html) - Play multiple pag files.
-- [SetProgress](./page/setprogress.html) - Set progress pag player progress.
-- [EditableIndex](./page/editable-index.html) - Get editable pag layer in pag file.
-- [ReplaceText](./page/replace-text.html) - Replace text in pag file.
-- [ReplaceImage](./page/replace-image.html) - Replace image in pag file.
-- [ReplaceVideo](./page/replace-video.html) - Replace video in pag file.
+- [Simple](./pages/simple.html) - A simple demo to play pag file.
+- [Multiple](./pages/multiple.html) - Play multiple pag files.
+- [SetProgress](./pages/setprogress.html) - Set progress pag player progress.
+- [EditableIndex](./pages/editable-index.html) - Get editable pag layer in pag file.
+- [ReplaceText](./pages/replace-text.html) - Replace text in pag file.
+- [ReplaceImage](./pages/replace-image.html) - Replace image in pag file.
+- [ReplaceVideo](./pages/replace-video.html) - Replace video in pag file.
 
 More web demos coming soon.
 
