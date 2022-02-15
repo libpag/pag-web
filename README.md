@@ -16,4 +16,13 @@ The repository store some libpag web demo.
 
 More web demos coming soon.
 
+## Vue
+
+- [vue2-libpag-webpack-demo](https://github.com/libpag/pag-web/tree/main/vue/vue2)
+- [vue3-vite-libpag](https://github.com/libpag/pag-web/tree/main/vue/vue3)
+
+# React
+
+- [react](https://github.com/libpag/pag-web/tree/main/react)
+
 Related link: [web sdk doc](https://github.com/Tencent/libpag/tree/main/web) | [more docs](https://github.com/Tencent/libpag).
