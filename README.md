@@ -11,9 +11,10 @@ The repository store some libpag web demo.
 - [SetProgress](./pages/setprogress.html) - Set progress pag player progress.
 - [EditableIndex](./pages/editable-index.html) - Get editable pag layer in pag file.
 - [ReplaceText](./pages/replace-text.html) - Replace text in pag file.
+- [RegisterFont](./pages/register-font.html) - Register font for pag file.
 - [ReplaceImage](./pages/replace-image.html) - Replace image in pag file.
 - [ReplaceVideo](./pages/replace-video.html) - Replace video in pag file.
-- [ReplaceVideo](./pages/audio.html) - Play audio from pag file.
+- [Audio](./pages/audio.html) - Play audio from pag file.
 
 More web demos coming soon.
 
