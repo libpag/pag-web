@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PAG</title>
+    <link rel="icon" href="https://pag.io/img/favicon.png" />
+    <style>
+      body {
+        padding: 12px;
+      }
+      .header {
+        height: 64px;
+        border-bottom: 1px solid rgb(193, 193, 193);
+        margin-bottom: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <img src="../assets/logo.png" alt="logo" width="133" height="48" />
+    </div>
+    <div>
+      <span>Unknown font family:</span>
+      <canvas class="canvas" id="pag-1"></canvas>
+      <span>Registered font:</span>
+      <canvas class="canvas" id="pag-2"></canvas>
+    </div>
+    <script src="https://unpkg.com/libpag@latest/lib/libpag.min.js"></script>
+    <script>
+      window.onload = async () => {
+        const pagUrl = '../assets/simple_text.pag';
+        const PAG = await window.libpag.PAGInit();
+        const fileBlob = await fetch(pagUrl).then((response) => response.blob());
+        const file = new window.File([fileBlob], pagUrl.replace(/(.*\/)*([^.]+)/i, '$2'));
+
+        // Unknown font
+        const pagFile1 = await PAG.PAGFile.load(file);
+        // Get TextDate by editableIndex.
+        // About editableIndex look for `editable-index.html`
+        const textDoc1 = pagFile1.getTextData(0);
+        textDoc1.fontFamily = 'unknown';
+        // Replace text by editableIndex
+        pagFile1.replaceText(0, textDoc1);
+        document.getElementById('pag-1').width = 360;
+        document.getElementById('pag-1').height = 360;
+        const pagView1 = await PAG.PAGView.init(pagFile1, document.getElementById('pag-1'));
+        pagView1.setRepeatCount(0);
+        await pagView1.play();
+        
+        // Registered font
+        const fontUrl = '../assets/SourceHanSerifCN-Regular.ttf';
+        const fontBlob = await fetch(fontUrl).then(response => response.blob());
+        const fontFile = new window.File([fontBlob], fontUrl.replace(/(.*\/)*([^.]+)/i, '$2'));
+        await PAG.PAGFont.registerFont('SourceHanSerifCN', fontFile);
+
+        const pagFile2 = await PAG.PAGFile.load(file);
+        // Get TextDate by editableIndex.
+        // About editableIndex look for `editable-index.html`
+        const textDoc2 = pagFile2.getTextData(0);
+        textDoc2.fontFamily = 'SourceHanSerifCN';
+        // Replace text by editableIndex
+        pagFile2.replaceText(0, textDoc2);
+        document.getElementById('pag-2').width = 360;
+        document.getElementById('pag-2').height = 360;
+        const pagView2 = await PAG.PAGView.init(pagFile2, document.getElementById('pag-2'));
+        pagView2.setRepeatCount(0);
+        await pagView2.play();
+      };
+    </script>
+  </body>
+</html>

@@ -47,7 +47,7 @@
         const afterPagFile = await PAG.PAGFile.load(file);
         // Get TextDate by editableIndex.
         // About editableIndex look for `editable-index.html`
-        const textDoc = await afterPagFile.getTextData(0);
+        const textDoc = afterPagFile.getTextData(0);
         textDoc.text = '替换后的文字';
         textDoc.fillColor = { red: 255, green: 255, blue: 255 };
         textDoc.applyFill = true;

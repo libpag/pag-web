@@ -36,12 +36,12 @@
         // Load the PAGFile from file.
         const pagFile = await PAG.PAGFile.load(file);
         // Set the width from the PAGFile.
-        document.getElementById('pag').width = await pagFile.width();
-        document.getElementById('pag').height = await pagFile.height();
+        document.getElementById('pag').width = pagFile.width();
+        document.getElementById('pag').height = pagFile.height();
         // Create PAGView.
         const pagView = await PAG.PAGView.init(pagFile, '#pag');
         // Set PAGView progress.
-        await pagView.setProgress(0.5);
+        pagView.setProgress(0.5);
       };
     </script>
   </body>

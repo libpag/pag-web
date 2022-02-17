@@ -32,21 +32,21 @@
         const fileBlob = await fetch(pagUrl).then((response) => response.blob());
         const file = new window.File([fileBlob], pagUrl.replace(/(.*\/)*([^.]+)/i, '$2'));
         const pagFile = await PAG.PAGFile.load(file);
-        document.getElementById('pag').width = await pagFile.width();
-        document.getElementById('pag').height = await pagFile.height();
+        document.getElementById('pag').width = pagFile.width();
+        document.getElementById('pag').height = pagFile.height();
         const pagView = await PAG.PAGView.init(pagFile, '#pag');
         pagView.setRepeatCount(0);
         await pagView.play();
         // Get editable image count.
-        const editableImageCount = await pagFile.numImages();
+        const editableImageCount = pagFile.numImages();
         let editableLayerList = [];
         for (let i = 0; i < editableImageCount; i++) {
-          const vectorPagLayer = await pagFile.getLayersByEditableIndex(i, PAG.LayerType.Image);
+          const vectorPagLayer = pagFile.getLayersByEditableIndex(i, PAG.LayerType.Image);
           for (let j = 0; j < vectorPagLayer.size(); j++) {
             const pagLayerWasm = vectorPagLayer.get(j);
             const pagLayer = new PAG.PAGLayer(pagLayerWasm);
-            const startTime = await pagLayer.startTime();
-            const duration = await pagLayer.duration();
+            const startTime = pagLayer.startTime();
+            const duration = pagLayer.duration();
             editableLayerList.push({ index: i, startTime: startTime, duration: duration });
           }
         }
