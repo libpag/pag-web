@@ -53,27 +53,27 @@
         const afterPagView = await PAG.PAGView.init(afterPagFile, '#after-pag');
         afterPagView.setRepeatCount(0);
         // Loop to replace image
-        const replaceLoop = async () => {
-          window.requestAnimationFrame(async () => {
-            await replaceLoop();
+        const replaceLoop = () => {
+          window.requestAnimationFrame(() => {
+            replaceLoop();
           });
-          await replaceImage();
+          replaceImage();
         };
-        
-        const replaceImage = async () => {
+
+        const replaceImage = () => {
           // Create PAGImage from ImageElement.
-          const pagImage = await PAG.PAGImage.fromSource(videoEl);
+          const pagImage = PAG.PAGImage.fromSource(videoEl);
           // Replace Image by editableIndex.
           // Get editableIndex demo in `editable-index.html`
-          await afterPagFile.replaceImage(1, pagImage);
-          await pagImage.destroy();
+          afterPagFile.replaceImage(1, pagImage);
+          pagImage.destroy();
         };
         // Reset video current time to start time.
         afterPagView.addListener('onAnimationRepeat', () => {
           videoEl.currentTime = 0;
         });
 
-        await replaceLoop();
+        replaceLoop();
         videoEl.play();
         await afterPagView.play();
       };

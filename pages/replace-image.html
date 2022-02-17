@@ -47,10 +47,10 @@
         const image = await loadImage('../assets/cat.png');
         if (!image) return;
         // Create PAGImage from ImageElement.
-        const pagImage = await PAG.PAGImage.fromSource(image);
+        const pagImage = PAG.PAGImage.fromSource(image);
         // Replace Image by editableIndex.
         // Get editableIndex demo in `editable-index.html`
-        await afterPagFile.replaceImage(1, pagImage);
+        afterPagFile.replaceImage(1, pagImage);
         document.getElementById('after-pag').width = 360;
         document.getElementById('after-pag').height = 360;
         const afterPagView = await PAG.PAGView.init(afterPagFile, '#after-pag');

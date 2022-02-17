@@ -1,12 +1,12 @@
 import { Resource } from 'pixi.js';
 
 class PAGResource extends Resource {
-  static async create(PAG, pagFile) {
-    const width = await pagFile.width();
-    const height = await pagFile.height();
+  static create(PAG, pagFile) {
+    const width = pagFile.width();
+    const height = pagFile.height();
     const pagResource = new PAGResource(width, height);
-    pagResource.pagPlayer = await PAG.PAGPlayer.create();
-    await pagResource.pagPlayer.setComposition(pagFile);
+    pagResource.pagPlayer = PAG.PAGPlayer.create();
+    pagResource.pagPlayer.setComposition(pagFile);
     pagResource.module = PAG;
     return pagResource;
   }
@@ -60,16 +60,16 @@ class PAGResource extends Resource {
       this.module.GL.textures[this.textureID] = glTexture.texture;
       // 生成 surface
       this.module.GL.makeContextCurrent(this.contextID);
-      this.pagSurface = await this.module._PAGSurface.FromTexture(this.textureID, width, height, false);
-      await this.pagPlayer.setSurface(this.pagSurface);
+      this.pagSurface = this.module.PAGSurface.FromTexture(this.textureID, width, height, false);
+      this.pagPlayer.setSurface(this.pagSurface);
     }
     await this.pagPlayer.flush();
     renderer.reset();
     return true;
   }
 
-  public async setProgress(progress) {
-    await this.pagPlayer.setProgress(progress);
+  public setProgress(progress) {
+    this.pagPlayer.setProgress(progress);
     this.update();
   }
 }

@@ -34,15 +34,15 @@
         const file = new window.File([fileBlob], pagUrl.replace(/(.*\/)*([^.]+)/i, '$2'));
         // First PAGView.
         const pagFile = await PAG.PAGFile.load(file);
-        document.getElementById('pag').width = await pagFile.width();
-        document.getElementById('pag').height = await pagFile.height();
+        document.getElementById('pag').width = pagFile.width();
+        document.getElementById('pag').height = pagFile.height();
         const pagView = await PAG.PAGView.init(pagFile, '#pag');
         pagView.setRepeatCount(0);
         await pagView.play();
         // Second PAGView.
         const pagFile2 = await PAG.PAGFile.load(file);
-        document.getElementById('pag-2').width = await pagFile2.width();
-        document.getElementById('pag-2').height = await pagFile2.height();
+        document.getElementById('pag-2').width = pagFile2.width();
+        document.getElementById('pag-2').height = pagFile2.height();
         const pagView2 = await PAG.PAGView.init(pagFile2, '#pag-2');
         pagView2.setRepeatCount(0);
         await pagView2.play();

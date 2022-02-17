@@ -17,8 +17,8 @@ export default {
         .then(async (blob) => {
           const file = new window.File([blob], url.replace(/(.*\/)*([^.]+)/i, '$2'));
           const pagFile = await PAG.PAGFile.load(file);
-          document.getElementById('pag').width = await pagFile.width();
-          document.getElementById('pag').height = await pagFile.height();
+          document.getElementById('pag').width = pagFile.width();
+          document.getElementById('pag').height = pagFile.height();
           const pagView = await PAG.PAGView.init(pagFile, '#pag');
           pagView.setRepeatCount(0);
           await pagView.play();
