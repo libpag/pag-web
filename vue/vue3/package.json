@@ -12,7 +12,7 @@
     "vue": "^3.2.25"
   },
   "devDependencies": {
-    "libpag": "^0.0.2",
+    "libpag": "^0.0.5",
     "vite": "^2.7.2"
   }
 }

@@ -22,6 +22,7 @@ export default {
           const pagView = await PAG.PAGView.init(pagFile, '#pag');
           pagView.setRepeatCount(0);
           await pagView.play();
+          console.log('play');
         });
     });
   },
