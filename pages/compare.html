@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PAG</title>
+    <link rel="icon" href="https://pag.io/img/favicon.png" />
+    <style>
+      body {
+        padding: 12px;
+      }
+      .header {
+        height: 64px;
+        border-bottom: 1px solid rgb(193, 193, 193);
+        margin-bottom: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <img src="../assets/logo.png" alt="logo" width="133" height="48" />
+    </div>
+    <div>
+      <canvas class="canvas" id="pag"></canvas>
+    </div>
+    <script src="https://unpkg.com/libpag@latest/lib/libpag.min.js"></script>
+    <script>
+      const loadImage = (url) => {
+        return new Promise((resolve) => {
+          const image = new Image();
+          image.onload = () => {
+            resolve(image);
+          };
+          image.src = url;
+        });
+      };
+
+      const compare = (array_1, array_2) => {
+        for (let i = 0; i > array_1.length; i++) {
+          if (array_1[i] !== array_2[i]) {
+            console.log(i);
+            return false;
+          }
+        }
+        return true;
+      };
+
+      window.onload = async () => {
+        const pagUrl = '../assets/like.pag';
+        // Initialize pag webassembly module.
+        const PAG = await window.libpag.PAGInit();
+        // Fetch pag file.
+        const fileBlob = await fetch(pagUrl).then((response) => response.blob());
+        const file = new window.File([fileBlob], pagUrl.replace(/(.*\/)*([^.]+)/i, '$2'));
+        // Load the PAGFile from file.
+        const pagFile = await PAG.PAGFile.load(file);
+        const canvas = document.getElementById('pag');
+        const gl = canvas.getContext('webgl');
+
+        // Set the width from the PAGFile.
+        canvas.width = 300;
+        canvas.height = 300;
+        // Create PAGView.
+        const pagView = await PAG.PAGView.init(pagFile, '#pag');
+        // Set PAGView progress.
+        await pagView.setProgress(0.5);
+
+        const canvas2D = document.createElement('canvas');
+        canvas2D.width = canvas.width;
+        canvas2D.height = canvas.height;
+        const canvas2dCtx = canvas2D.getContext('2d');
+        canvas2dCtx.drawImage(canvas, 0, 0);
+        const imageData = canvas2dCtx.getImageData(0, 0, canvas2D.width, canvas2D.height);
+
+        const testImage = await loadImage('../assets/test.png');
+        const testCanvas = document.createElement('canvas');
+        testCanvas.width = canvas.width;
+        testCanvas.height = canvas.height;
+        const testCtx = testCanvas.getContext('2d');
+        testCtx.drawImage(testImage, 0, 0);
+        const testImageData = testCtx.getImageData(0, 0, testCanvas.width, testCanvas.height);
+
+        console.log(compare(imageData.data, testImageData.data));
+
+        // Download file
+        // const dataURL = canvas2D.toDataURL('image/png', 1.0);
+        // const alink = document.createElement('a');
+        // alink.style.display = 'none';
+        // alink.href = dataURL;
+        // alink.download = 'test.png';
+        // document.body.appendChild(alink);
+        // alink.click();
+      };
+    </script>
+  </body>
+</html>
