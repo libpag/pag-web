@@ -7,7 +7,7 @@ export default defineConfig({
     vue(),
     copy({
       targets: [
-        { src: './node_modules/libpag/lib/libpag.wasm', dest: process.env.NODE_ENV === 'production' ? 'dist/' : './' },
+        { src: './node_modules/libpag/lib/libpag.wasm', dest: process.env.NODE_ENV === 'production' ? 'dist/' : 'public/' },
       ],
       hook: process.env.NODE_ENV === 'production' ? 'writeBundle' : "buildStart",
     }),
