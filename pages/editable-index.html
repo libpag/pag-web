@@ -41,10 +41,9 @@
         const editableImageCount = pagFile.numImages();
         let editableLayerList = [];
         for (let i = 0; i < editableImageCount; i++) {
-          const vectorPagLayer = pagFile.getLayersByEditableIndex(i, PAG.LayerType.Image);
+          const vectorPagLayer = pagFile.getLayersByEditableIndex(i, libpag.types.LayerType.Image);
           for (let j = 0; j < vectorPagLayer.size(); j++) {
-            const pagLayerWasm = vectorPagLayer.get(j);
-            const pagLayer = new PAG.PAGLayer(pagLayerWasm);
+            const pagLayer = vectorPagLayer.get(j);
             const startTime = pagLayer.startTime();
             const duration = pagLayer.duration();
             editableLayerList.push({ index: i, startTime: startTime, duration: duration });
