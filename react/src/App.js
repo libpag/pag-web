@@ -4,9 +4,7 @@ import { PAGInit } from 'libpag';
 
 function App() {
   useEffect(() => {
-    PAGInit({
-      locateFile: (file) => 'https://unpkg.com/libpag@latest/lib/' + file,
-    }).then((PAG) => {
+    PAGInit().then((PAG) => {
       const url = 'https://pag.io/file/like.pag';
       fetch(url)
         .then((response) => response.blob())
