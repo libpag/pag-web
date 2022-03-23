@@ -1,11 +1,11 @@
-const path = require('path')
-const config = require('./config')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const path = require('path');
+const config = require('./config');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   configureWebpack: {
     entry: {
-      app: './src/main.js'
+      app: './src/main.js',
     },
     output: {
       path: config.build.assetsRoot,
@@ -17,10 +17,8 @@ module.exports = {
           from: path.resolve(__dirname, './node_modules/libpag/lib/libpag.wasm'),
           to: config.build.assetsPublicPath,
         },
-    ]),
-  ]
-},
-publicPath: process.env.NODE_ENV === 'production'
-  ? config.build.assetsPublicPath
-  : config.dev.assetsPublicPath,
+      ]),
+    ],
+  },
+  publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
 };
