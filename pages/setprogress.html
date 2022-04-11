@@ -31,15 +31,15 @@
         // Initialize pag webassembly module.
         const PAG = await window.libpag.PAGInit();
         // Fetch pag file.
-        const fileBlob = await fetch(pagUrl).then((response) => response.blob());
-        const file = new window.File([fileBlob], pagUrl.replace(/(.*\/)*([^.]+)/i, '$2'));
+        const buffer = await fetch(pagUrl).then((response) => response.arrayBuffer());
         // Load the PAGFile from file.
-        const pagFile = await PAG.PAGFile.load(file);
+        const pagFile = await PAG.PAGFile.load(buffer);
         // Set the width from the PAGFile.
-        document.getElementById('pag').width = pagFile.width();
-        document.getElementById('pag').height = pagFile.height();
+        const canvas = document.getElementById('pag');
+        canvas.width = pagFile.width();
+        canvas.height = pagFile.height();
         // Create PAGView.
-        const pagView = await PAG.PAGView.init(pagFile, '#pag');
+        const pagView = await PAG.PAGView.init(pagFile, canvas);
         // Set PAGView progress.
         await pagView.setProgress(0.5);
       };

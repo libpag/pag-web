@@ -33,18 +33,17 @@
         const pagUrl = '../assets/text.pag';
 
         const PAG = await window.libpag.PAGInit();
-        console.log(window.libpag);
-        const fileBlob = await fetch(pagUrl).then((response) => response.blob());
-        const file = new window.File([fileBlob], pagUrl.replace(/(.*\/)*([^.]+)/i, '$2'));
+        const buffer = await fetch(pagUrl).then((response) => response.arrayBuffer());
         // Before
-        const beforePagFile = await PAG.PAGFile.load(file);
-        document.getElementById('before-pag').width = 360;
-        document.getElementById('before-pag').height = 360;
-        const beforePagView = await PAG.PAGView.init(beforePagFile, '#before-pag');
+        const beforePagFile = await PAG.PAGFile.load(buffer);
+        const beforeCanvas = document.getElementById('before-pag');
+        beforeCanvas.width = 360;
+        beforeCanvas.height = 360;
+        const beforePagView = await PAG.PAGView.init(beforePagFile, beforeCanvas);
         beforePagView.setRepeatCount(0);
         await beforePagView.play();
         // After
-        const afterPagFile = await PAG.PAGFile.load(file);
+        const afterPagFile = await PAG.PAGFile.load(buffer);
         // Get TextDate by editableIndex.
         // About editableIndex look for `editable-index.html`
         const textDoc = afterPagFile.getTextData(0);
@@ -66,9 +65,10 @@
         textDoc.tracking = 600;
         // Replace text by editableIndex
         afterPagFile.replaceText(0, textDoc);
-        document.getElementById('after-pag').width = 360;
-        document.getElementById('after-pag').height = 360;
-        const afterPagView = await PAG.PAGView.init(afterPagFile, '#after-pag');
+        const afterCanvas = document.getElementById('after-pag');
+        afterCanvas.width = 360;
+        afterCanvas.height = 360;
+        const afterPagView = await PAG.PAGView.init(afterPagFile, afterCanvas);
         afterPagView.setRepeatCount(0);
         await afterPagView.play();
       };

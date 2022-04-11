@@ -32,16 +32,16 @@
         // Initialize pag webassembly module.
         const PAG = await window.libpag.PAGInit();
         // Fetch pag file.
-        const fileBlob = await fetch(pagUrl).then((response) => response.blob());
-        const file = new window.File([fileBlob], pagUrl.replace(/(.*\/)*([^.]+)/i, '$2'));
+        const buffer = await fetch(pagUrl).then((response) => response.arrayBuffer());
         // Load the PAGFile from file.
-        const pagFile = await PAG.PAGFile.load(file);
+        const pagFile = await PAG.PAGFile.load(buffer);
 
         // Set the width from the PAGFile.
-        document.getElementById('pag').width = pagFile.width() / 2;
-        document.getElementById('pag').height = pagFile.height() / 2;
+        const canvas = document.getElementById('pag');
+        canvas.width = 360;
+        canvas.height = 360;
         // Create PAGView.
-        const pagView = await PAG.PAGView.init(pagFile, '#pag');
+        const pagView = await PAG.PAGView.init(pagFile, canvas);
         // Get audio data.
         const audioBytes = pagFile.audioBytes();
         if (audioBytes.byteLength > 0) {
