@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PAG</title>
+    <link rel="icon" href="https://pag.io/img/favicon.png" />
+    <style>
+      body {
+        padding: 12px;
+      }
+      .header {
+        height: 64px;
+        border-bottom: 1px solid rgb(193, 193, 193);
+        margin-bottom: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <img src="../assets/logo.png" alt="logo" width="133" height="48" />
+    </div>
+    <div>
+      <div id="box"></div>
+    </div>
+    <script src="https://unpkg.com/libpag@latest/lib/libpag.min.js"></script>
+    <script>
+      window.onload = async () => {
+        const PAG = await window.libpag.PAGInit();
+        const urlList = [
+          '../assets/like.pag',
+          '../assets/like.pag',
+          '../assets/like.pag',
+          '../assets/like.pag',
+          '../assets/like.pag',
+          '../assets/like.pag',
+          '../assets/like.pag',
+          '../assets/like.pag',
+          '../assets/like.pag',
+          '../assets/like.pag',
+          '../assets/like.pag',
+          '../assets/like.pag',
+          '../assets/like.pag',
+          '../assets/like.pag',
+          '../assets/like.pag',
+          '../assets/like.pag',
+          '../assets/like.pag',
+          '../assets/like.pag',
+          '../assets/like.pag',
+          '../assets/like.pag',
+        ];
+
+        const buffers = await Promise.all(
+          urlList.map((path) => {
+            return fetch(path).then((response) => response.arrayBuffer());
+          }),
+        );
+
+        const pagFiles = buffers.map((buffer) => PAG.PAGFile.loadFromBuffer(buffer));
+
+        const canvasList = pagFiles.map(() => {
+          const canvas = document.createElement('canvas');
+          canvas.width = 200;
+          canvas.height = 200;
+          document.getElementById('box')?.appendChild(canvas);
+          return canvas;
+        });
+
+        const pagViews = await Promise.all(
+          pagFiles.map(async (pagFile, index) => {
+            const pagView = await PAG.PAGView.init(pagFile, canvasList[index], { useCanvas2D: true });
+            pagView?.setRepeatCount(0);
+            return pagView;
+          }),
+        );
+        canvasList.forEach((canvas, index) => {
+          canvas.addEventListener('click', async () => {
+            const pagView = pagViews[index];
+            if (pagView?.isPlaying) {
+              pagView?.pause();
+            } else {
+              await pagView?.play();
+            }
+          });
+        });
+      };
+    </script>
+  </body>
+</html>

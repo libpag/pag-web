@@ -13,7 +13,8 @@ The repository store some libpag web demo.
 - [ReplaceImage](./pages/replace-image.html) - Replace image in pag file.
 - [ReplaceVideo](./pages/replace-video.html) - Replace video in pag file.
 - [Audio](./pages/audio.html) - Play audio from pag file.
-- [FullBox](./pages/full-box.html) - Play audio from pag file.
+- [FullBox](./pages/full-box.html) - Make PAGView fill parent box.
+- [Canvas2D(Beta)](./pages/canvas-2d.html) - Use canvas2d.
 
 Quick look
 ``` bash
