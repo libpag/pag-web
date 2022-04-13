@@ -2,8 +2,6 @@
 
 The repository store some libpag web demo.
 
-[Quick look](https://pag.io/pag-web/)
-
 ## Demo Code
 
 - [Simple](./pages/simple.html) - A simple demo to play pag file.
@@ -15,6 +13,13 @@ The repository store some libpag web demo.
 - [ReplaceImage](./pages/replace-image.html) - Replace image in pag file.
 - [ReplaceVideo](./pages/replace-video.html) - Replace video in pag file.
 - [Audio](./pages/audio.html) - Play audio from pag file.
+- [FullBox](./pages/full-box.html) - Play audio from pag file.
+
+Quick look
+``` bash
+$ npm install
+$ npm run start
+```
 
 More web demos coming soon.
 
@@ -25,6 +30,6 @@ More web demos coming soon.
 
 # React
 
-- [react](https://github.com/libpag/pag-web/tree/main/react)
+- [React](https://github.com/libpag/pag-web/tree/main/react)
 
 Related link: [web sdk doc](https://github.com/Tencent/libpag/tree/main/web) | [more docs](https://github.com/Tencent/libpag).

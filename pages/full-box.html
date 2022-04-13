@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PAG</title>
+    <link rel="icon" href="https://pag.io/img/favicon.png" />
+    <style>
+      body {
+        padding: 12px;
+      }
+      .header {
+        height: 64px;
+        border-bottom: 1px solid rgb(193, 193, 193);
+        margin-bottom: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <img src="../assets/logo.png" alt="logo" width="133" height="48" />
+    </div>
+    <div>
+      <div id="box" style="width: 300px; height: 300px">
+        <canvas class="pag" id="pag"></canvas>
+      </div>
+      <button id="resize">RESIZE</button>
+    </div>
+    <script src="https://unpkg.com/libpag@latest/lib/libpag.min.js"></script>
+    <script>
+      window.onload = async () => {
+        const pagUrl = '../assets/like.pag';
+        // Initialize pag webassembly module.
+        const PAG = await window.libpag.PAGInit();
+        // Fetch pag file.
+        const buffer = await fetch(pagUrl).then((response) => response.arrayBuffer());
+        // Load the PAGFile from file.
+        const pagFile = await PAG.PAGFile.load(buffer);
+        // Set the width from the PAGFile.
+        const canvas = document.getElementById('pag');
+        canvas.width = pagFile.width();
+        canvas.height = pagFile.height();
+        // Create PAGView.
+        const pagView = await PAG.PAGView.init(pagFile, canvas, { fullBox: true });
+
+        document.getElementById('resize').addEventListener('click', async () => {
+          document.getElementById('box').style.width = '600px';
+          document.getElementById('box').style.height = '600px';
+          pagView.updateSize();
+          await pagView.flush();
+        });
+      };
+    </script>
+  </body>
+</html>

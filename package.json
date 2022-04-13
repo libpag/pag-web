@@ -8,6 +8,10 @@
   ],
   "author": "zenoslin",
   "devDependencies": {
-    "gh-pages": "^3.2.3"
+    "gh-pages": "^3.2.3",
+    "http-server": "^14.1.0"
+  },
+  "scripts": {
+    "start": "http-server -p 8080 . -c-1"
   }
 }
