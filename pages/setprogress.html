@@ -39,9 +39,10 @@
         canvas.width = pagFile.width();
         canvas.height = pagFile.height();
         // Create PAGView.
-        const pagView = await PAG.PAGView.init(pagFile, canvas);
+        const pagView = await PAG.PAGView.init(pagFile, canvas, { firstFrame: false });
         // Set PAGView progress.
-        await pagView.setProgress(0.5);
+        pagView.setProgress(0.5);
+        await pagView.flush();
       };
     </script>
   </body>

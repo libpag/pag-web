@@ -23,7 +23,7 @@
     </div>
     <div>
       <div id="box" style="width: 300px; height: 300px">
-        <canvas class="pag" id="pag"></canvas>
+        <canvas id="pag" style="width: 100%; height: 100%"></canvas>
       </div>
       <button id="resize">RESIZE</button>
     </div>
@@ -39,14 +39,17 @@
         const pagFile = await PAG.PAGFile.load(buffer);
         // Set the width from the PAGFile.
         const canvas = document.getElementById('pag');
-        canvas.width = pagFile.width();
-        canvas.height = pagFile.height();
+        const styleDeclaration = window.getComputedStyle(canvas, null);
+        canvas.width = Number(styleDeclaration.width.replace('px', ''));
+        canvas.height = Number(styleDeclaration.height.replace('px', ''));
         // Create PAGView.
-        const pagView = await PAG.PAGView.init(pagFile, canvas, { fullBox: true });
+        const pagView = await PAG.PAGView.init(pagFile, canvas, { useScale: false });
 
         document.getElementById('resize').addEventListener('click', async () => {
           document.getElementById('box').style.width = '600px';
           document.getElementById('box').style.height = '600px';
+          canvas.width = Number(styleDeclaration.width.replace('px', ''));
+          canvas.height = Number(styleDeclaration.height.replace('px', ''));
           pagView.updateSize();
           await pagView.flush();
         });
