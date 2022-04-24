@@ -15,6 +15,7 @@ The repository store some libpag web demo.
 - [Audio](./pages/audio.html) - Play audio from pag file.
 - [FullBox](./pages/full-box.html) - Make PAGView fill parent box.
 - [Canvas2D(Beta)](./pages/canvas-2d.html) - Use canvas2d.
+- [SoftwareDecoder](./pages/software-decoder.html) - Use software decoder.
 
 Quick look
 ``` bash
@@ -29,8 +30,12 @@ More web demos coming soon.
 - [vue2-libpag-webpack-demo](https://github.com/libpag/pag-web/tree/main/vue/vue2)
 - [vue3-vite-libpag](https://github.com/libpag/pag-web/tree/main/vue/vue3)
 
-# React
+## React
 
 - [React](https://github.com/libpag/pag-web/tree/main/react)
+
+## PixiJS
+
+- [PixiJS](https://github.com/libpag/pag-web/tree/main/pixijs)
 
 Related link: [web sdk doc](https://github.com/Tencent/libpag/tree/main/web) | [more docs](https://github.com/Tencent/libpag).
