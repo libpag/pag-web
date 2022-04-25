@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "libpag": "^0.1.3",
+    "libpag": "^0.1.7-beta.2",
     "pixi.js": "^6.3.0"
   },
   "devDependencies": {

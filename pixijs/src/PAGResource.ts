@@ -10,22 +10,23 @@ export default class PAGResource extends Resource {
   private textureID = -1;
   private pagPlayer: PAGPlayer;
   private pagSurface: PAGSurface | null = null;
+  private needFlush = true;
+  private needUpload = false;
 
   public constructor(PAG: PAGTypes.PAG, pagFile: PAGFile) {
-    super(pagFile.width(), pagFile.height());
+    // super(pagFile.width(), pagFile.height());
+    super(480, 480);
     this.PAG = PAG;
     this.pagPlayer = PAG.PAGPlayer.create();
     this.pagPlayer.setComposition(pagFile);
   }
 
-  public async upload(
+  public upload(
     renderer: Renderer,
     baseTexture: BaseTexture<Resource, IAutoDetectOptions>,
     glTexture: GLTexture & { texture: { name: number } },
   ) {
     const { width, height, PAG } = this;
-    glTexture.width = width;
-    glTexture.height = height;
 
     const { gl } = renderer;
 
@@ -36,7 +37,7 @@ export default class PAGResource extends Resource {
         minorVersion: 0,
       });
     }
-
+    // glTexture 是否有改变 重新创建 pagSurface
     if (glTexture.texture.name !== this.textureID) {
       // texture 变化
       if (this.textureID !== -1) {
@@ -65,13 +66,34 @@ export default class PAGResource extends Resource {
       this.pagSurface = PAG.PAGSurface.FromTexture(this.textureID, width, height, false);
       this.pagPlayer.setSurface(this.pagSurface);
     }
-    await this.pagPlayer.flush();
-    renderer.reset();
-    return true;
+
+    if (this.needFlush) {
+      this.needFlush = false;
+      this.pagPlayer.flush().then((res) => {
+        this.needUpload = res;
+        renderer.reset();
+        // reset scissor
+        gl.disable(gl.SCISSOR_TEST);
+        if (res) this.update();
+      });
+    }
+
+    if (this.needUpload) {
+      this.needUpload = false;
+      return true;
+    } else {
+      return false;
+    }
   }
 
   public setProgress(progress: number) {
     this.pagPlayer?.setProgress(progress);
+    this.needFlush = true;
+    this.update();
+  }
+
+  public flush() {
+    this.needFlush = true;
     this.update();
   }
 }
