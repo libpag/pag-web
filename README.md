@@ -16,9 +16,11 @@ The repository store some libpag web demo.
 - [FullBox](./pages/full-box.html) - Make PAGView fill parent box.
 - [Canvas2D(Beta)](./pages/canvas-2d.html) - Use canvas2d.
 - [SoftwareDecoder](./pages/software-decoder.html) - Use software decoder.
+- [OffscreenCanvas](./pages/offscreen-canvas.html) - Create PAGView from offscreen canvas.
 
 Quick look
-``` bash
+
+```bash
 $ npm install
 $ npm run start
 ```

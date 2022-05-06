@@ -11,7 +11,7 @@ export default {
   name: 'App',
   mounted() {
     PAGInit().then((PAG) => {
-      const url = 'https://pag.io/file/like.pag';
+      const url = './like.pag';
       fetch(url)
         .then((response) => response.blob())
         .then(async (blob) => {

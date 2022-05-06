@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>offscreen-canvas</title>
+  </head>
+  <body>
+    <div id="box"></div>
+    <script src="https://unpkg.com/libpag@latest/lib/libpag.min.js"></script>
+    <script>
+      window.onload = async () => {
+        const PAG = await window.libpag.PAGInit();
+        console.log('PAG', PAG);
+
+        const buffer = await fetch('../assets/like.pag').then((response) => response.arrayBuffer());
+        const pagFile = await PAG.PAGFile.load(buffer);
+
+        const renderCanvas = new OffscreenCanvas(800, 800);
+        const canvas = document.createElement('canvas');
+        canvas.width = 400;
+        canvas.height = 400;
+        const ctx = canvas.getContext('2d');
+        document.getElementById('box').appendChild(canvas);
+
+        let pagView = await PAG.PAGView.init(pagFile, renderCanvas);
+        pagView?.addListener('onAnimationFlushed', () => {
+          ctx?.clearRect(0, 0, canvas.width, canvas.height);
+          ctx?.drawImage(
+            renderCanvas,
+            0,
+            0,
+            renderCanvas.width,
+            renderCanvas.height,
+            0,
+            0,
+            canvas.width,
+            canvas.height,
+          );
+        });
+        await pagView?.play();
+      };
+    </script>
+  </body>
+</html>
