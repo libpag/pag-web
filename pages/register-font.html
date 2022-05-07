@@ -53,13 +53,13 @@
         const fontUrl = '../assets/SourceHanSerifCN-Regular.ttf';
         const fontBlob = await fetch(fontUrl).then((response) => response.blob());
         const fontFile = new window.File([fontBlob], fontUrl.replace(/(.*\/)*([^.]+)/i, '$2'));
-        await PAG.PAGFont.registerFont('SourceHanSerifCN', fontFile);
+        await PAG.PAGFont.registerFont('SourceHanSerifCN-Regular', fontFile);
 
         const pagFile2 = await PAG.PAGFile.load(buffer);
         // Get TextDate by editableIndex.
         // About editableIndex look for `editable-index.html`
         const textDoc2 = pagFile2.getTextData(0);
-        textDoc2.fontFamily = 'SourceHanSerifCN';
+        textDoc2.fontFamily = 'SourceHanSerifCN-Regular';
         // Replace text by editableIndex
         pagFile2.replaceText(0, textDoc2);
         const canvas2 = document.getElementById('pag-2');
