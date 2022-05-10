@@ -68,6 +68,7 @@
           image.onerror = () => {
             resolve(false);
           };
+          image.crossOrigin = 'anonymous';
           image.src = src;
         });
       };
