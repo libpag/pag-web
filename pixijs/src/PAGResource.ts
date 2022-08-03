@@ -61,7 +61,7 @@ export default class PAGResource extends Resource {
     if (this.renderTargetID < 1) {
       this.renderTargetID = this.backendCtx.registerRenderTarget(this.fbo);
       this.backendCtx.makeCurrent();
-      this.pagSurface = PAG.PAGSurface.FromRenderTarget(this.renderTargetID, width, height, false);
+      this.pagSurface = PAG.PAGSurface.fromRenderTarget(this.renderTargetID, width, height, false);
       this.pagPlayer.setSurface(this.pagSurface);
       this.backendCtx.clearCurrent();
     }
