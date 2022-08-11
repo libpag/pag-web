@@ -17,6 +17,7 @@ The repository store some libpag web demo.
 - [Canvas2D(Beta)](./pages/canvas-2d.html) - Use canvas2d.
 - [SoftwareDecoder](./pages/software-decoder.html) - Use software decoder.
 - [OffscreenCanvas](./pages/offscreen-canvas.html) - Create PAGView from offscreen canvas.
+- [SetComposition](./pages/set-composition.html) - Set PAGComposition(PAGFile) into PAGView.
 
 Quick look
 
