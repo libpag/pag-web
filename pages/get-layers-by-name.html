@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PAG</title>
+    <link rel="icon" href="https://pag.io/img/favicon.png" />
+    <style>
+      body {
+        padding: 12px;
+      }
+      .header {
+        height: 64px;
+        border-bottom: 1px solid rgb(193, 193, 193);
+        margin-bottom: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <img src="../assets/logo.png" alt="logo" width="133" height="48" />
+    </div>
+    <div>
+      <canvas class="canvas" id="text-pag"></canvas>
+      <canvas class="canvas" id="image-pag"></canvas>
+    </div>
+    <script src="https://unpkg.com/libpag@latest/lib/libpag.min.js"></script>
+    <script>
+      window.onload = async () => {
+        const PAG = await window.libpag.PAGInit();
+
+        // replace text
+        const textPagUrl = '../assets/simple_text.pag';
+        const textBuffer = await fetch(textPagUrl).then((response) => response.arrayBuffer());
+        const textPagFile = await PAG.PAGFile.load(textBuffer);
+        // get layers by name
+        const vector = textPagFile.getLayersByName('Text');
+        if (vector.size() > 0) {
+          const pagTextLayer = vector.get(0);
+          pagTextLayer.setText('Hello World');
+        }
+        // render
+        const textCanvas = document.getElementById('text-pag');
+        textCanvas.width = 360;
+        textCanvas.height = 360;
+        const textPagView = await PAG.PAGView.init(textPagFile, textCanvas);
+        textPagView.play();
+
+        // replace image
+        const imagePagUrl = '../assets/snowman.pag';
+        const imageBuffer = await fetch(imagePagUrl).then((response) => response.arrayBuffer());
+        const imagePagFile = await PAG.PAGFile.load(imageBuffer);
+        // get layers by name
+        const vector2 = imagePagFile.getLayersByName('雪人.png');
+        if (vector2.size() > 0) {
+          const pagImageLayer = vector2.get(0);
+          const image = await loadImage('../assets/cat.png');
+          const pagImage = PAG.PAGImage.fromSource(image);
+          pagImageLayer.setImage(pagImage);
+        }
+        // render
+        const imageCanvas = document.getElementById('image-pag');
+        imageCanvas.width = 360;
+        imageCanvas.height = 360;
+        const imagePagView = await PAG.PAGView.init(imagePagFile, imageCanvas);
+        imagePagView.play();
+      };
+
+      const loadImage = (src) => {
+        return new Promise((resolve) => {
+          const image = new Image();
+          image.onload = () => {
+            resolve(image);
+          };
+          image.crossOrigin = 'anonymous';
+          image.src = src;
+        });
+      };
+    </script>
+  </body>
+</html>
