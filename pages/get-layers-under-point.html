@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PAG</title>
+    <link rel="icon" href="https://pag.io/img/favicon.png" />
+    <style>
+      body {
+        padding: 12px;
+      }
+      .header {
+        height: 64px;
+        border-bottom: 1px solid rgb(193, 193, 193);
+        margin-bottom: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <img src="../assets/logo.png" alt="logo" width="133" height="48" />
+    </div>
+    <div>
+      <canvas class="canvas" id="pag"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/libpag@4.1.28/lib/libpag.min.js"></script>
+    <script>
+      window.onload = async () => {
+        const PAG = await window.libpag.PAGInit();
+        const { PAGFile, PAGView } = PAG;
+        const buffer = await fetch('../assets/text.pag').then((response) => response.arrayBuffer());
+        const pagFile = await PAGFile.load(buffer);
+
+        const canvas = document.getElementById('pag');
+        canvas.width = 720;
+        canvas.height = 720;
+
+        const pagView = await PAGView.init(pagFile, canvas);
+        pagView.setRepeatCount(0);
+        pagView.play();
+        canvas.addEventListener('click', (event) => {
+          const { offsetX, offsetY } = event;
+          console.log(offsetX, offsetY);
+          const layers = pagView.getLayersUnderPoint(offsetX * devicePixelRatio, offsetY * devicePixelRatio);
+          for (let i = 0; i < layers.size(); i++) {
+            const layer = layers.get(i);
+            console.log(layer);
+          }
+        });
+      };
+    </script>
+  </body>
+</html>

@@ -18,6 +18,8 @@ The repository store some libpag web demo.
 - [SoftwareDecoder](./pages/software-decoder.html) - Use software decoder.
 - [OffscreenCanvas](./pages/offscreen-canvas.html) - Create PAGView from offscreen canvas.
 - [SetComposition](./pages/set-composition.html) - Set PAGComposition(PAGFile) into PAGView.
+- [Make composition](./pages/make-composition.html) - Make a new PAGComposition into PAGView.
+- [Get layers under point](./pages/get-layers-under-point.html) - Get layers under point.
 
 Quick look
 

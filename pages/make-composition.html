@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PAG</title>
+    <link rel="icon" href="https://pag.io/img/favicon.png" />
+    <style>
+      body {
+        padding: 12px;
+      }
+      .header {
+        height: 64px;
+        border-bottom: 1px solid rgb(193, 193, 193);
+        margin-bottom: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <img src="../assets/logo.png" alt="logo" width="133" height="48" />
+    </div>
+    <div>
+      <canvas class="canvas" id="pag"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/libpag@latest/lib/libpag.min.js"></script>
+    <script>
+      window.onload = async () => {
+        // Initialize pag webassembly module.
+        const PAG = await window.libpag.PAGInit();
+        // Fetch pag file.
+        const [buffer1, buffer2] = await Promise.all([
+          fetch('../assets/like.pag').then((response) => response.arrayBuffer()),
+          fetch('../assets/snowman.pag').then((response) => response.arrayBuffer()),
+        ]);
+        // Load the PAGFile from file.
+        const [pagFile1, pagFile2] = await Promise.all([PAG.PAGFile.load(buffer1), PAG.PAGFile.load(buffer2)]);
+        // Make new PAGComposition.
+        const pagComposition = PAG.PAGComposition.make(1080, 1080);
+        // Add PAGFile as PAGLayer to PAGComposition.
+        pagComposition.addLayer(pagFile1);
+        // Make scale matrix
+        const matrix1 = PAG.Matrix.makeScale(2, 2);
+        pagFile1.setMatrix(matrix1);
+        // Add PAGFile as PAGLayer to PAGComposition.
+        pagComposition.addLayer(pagFile2);
+        // Make translate matrix
+        const matrix2 = PAG.Matrix.makeTrans(100, 100);
+        pagFile2.setMatrix(matrix2);
+
+        // Set the width from the PAGFile.
+        const canvas = document.getElementById('pag');
+        canvas.width = pagComposition.width();
+        canvas.height = pagComposition.height();
+
+        // Create PAGView.
+        const pagView = await PAG.PAGView.init(pagComposition, canvas);
+        // Set PAGView play infinity.
+        pagView.setRepeatCount(0);
+        await pagView.play();
+      };
+    </script>
+  </body>
+</html>
