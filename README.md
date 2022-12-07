@@ -20,6 +20,7 @@ The repository store some libpag web demo.
 - [SetComposition](./pages/set-composition.html) - Set PAGComposition(PAGFile) into PAGView.
 - [Make composition](./pages/make-composition.html) - Make a new PAGComposition into PAGView.
 - [Get layers under point](./pages/get-layers-under-point.html) - Get layers under point.
+- [Play with scroll](./pages/play-with-scroll.html) - Play with scroll.
 
 Quick look
 
