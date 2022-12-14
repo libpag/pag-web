@@ -48,6 +48,7 @@
         // Make translate matrix
         const matrix2 = PAG.Matrix.makeTrans(100, 100);
         pagFile2.setMatrix(matrix2);
+        pagFile2.setStartTime(pagFile1.duration());
 
         // Set the width from the PAGFile.
         const canvas = document.getElementById('pag');

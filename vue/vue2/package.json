@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "libpag": "^4.0.5-release.5",
+    "libpag": "^4.1.33",
     "vue": "^2.6.11"
   },
   "devDependencies": {
