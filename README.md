@@ -9,21 +9,22 @@ This repo is for demonstrating how to use the PAG SDK only, and it's not activel
 - [Simple](./pages/simple.html) - A simple demo to play pag file.
 - [Multiple](./pages/multiple.html) - Play multiple pag files.
 - [SetProgress](./pages/setprogress.html) - Set progress pag player progress.
-- [EditableIndex](./pages/editable-index.html) - Get editable pag layer in pag file.
+- [EditableIndex](./pages/editable-index.html) - Get an editable pag layer in pag file.
 - [ReplaceText](./pages/replace-text.html) - Replace text in pag file.
 - [RegisterFont](./pages/register-font.html) - Register font for pag file.
-- [ReplaceImage](./pages/replace-image.html) - Replace image in pag file.
+- [ReplaceImage](./pages/replace-image.html) - Replace the image in pag file.
 - [ReplaceVideo](./pages/replace-video.html) - Replace video in pag file.
 - [Audio](./pages/audio.html) - Play audio from pag file.
-- [FullBox](./pages/full-box.html) - Make PAGView fill parent box.
+- [FullBox](./pages/full-box.html) - Make PAGView fill the parent box.
 - [Canvas2D(Beta)](./pages/canvas-2d.html) - Use canvas2d.
 - [SoftwareDecoder](./pages/software-decoder.html) - Use software decoder.
-- [OffscreenCanvas](./pages/offscreen-canvas.html) - Create PAGView from offscreen canvas.
+- [OffscreenCanvas](./pages/offscreen-canvas.html) - Create PAGView from the offscreen canvas.
 - [SetComposition](./pages/set-composition.html) - Set PAGComposition(PAGFile) into PAGView.
 - [Make composition](./pages/make-composition.html) - Make a new PAGComposition into PAGView.
 - [Get layers under point](./pages/get-layers-under-point.html) - Get layers under point.
 - [Play with scroll](./pages/play-with-scroll.html) - Play with scroll.
 - [Make Snapshot](./pages/make-snapshot.html) - Make Snapshot.
+- [WebWorker](./pages/web-worker.html) - Running in WebWorker.
 
 Quick look
 
@@ -47,4 +48,4 @@ More web demos coming soon.
 
 - [PixiJS](https://github.com/libpag/pag-web/tree/main/pixijs)
 
-Related link: [web sdk doc](https://github.com/Tencent/libpag/tree/main/web) | [more docs](https://github.com/Tencent/libpag).
+Related link: [Web SDK doc](https://github.com/Tencent/libpag/tree/main/web) | [more docs](https://github.com/Tencent/libpag).
