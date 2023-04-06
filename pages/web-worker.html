@@ -27,7 +27,6 @@
     <script type="module">
       import { createPAGWorker, WorkerPAGFile, WorkerPAGImage, WorkerPAGView } from '../lib/libpag.worker.esm.js';
       window.onload = async () => {
-        const pagUrl = '../assets/like.pag';
         const worker = await createPAGWorker({
           locateFile: (file) => {
             if (file === 'libpag.wasm') {
