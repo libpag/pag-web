@@ -24,7 +24,6 @@ This repo is for demonstrating how to use the PAG SDK only, and it's not activel
 - [Get layers under point](./pages/get-layers-under-point.html) - Get layers under point.
 - [Play with scroll](./pages/play-with-scroll.html) - Play with scroll.
 - [Make Snapshot](./pages/make-snapshot.html) - Make Snapshot.
-- [WebWorker](./pages/web-worker.html) - Running in WebWorker.
 
 Quick look
 
