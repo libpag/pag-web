@@ -1,10 +1,10 @@
 import { BaseTexture, GLTexture, IAutoDetectOptions, Renderer, Resource } from 'pixi.js';
 
 import type { types as PAGTypes } from 'libpag';
-import type { BackendContext } from 'libpag/types/core/backend-context';
-import type { PAGFile } from 'libpag/types/pag-file';
-import type { PAGPlayer } from 'libpag/types/pag-player';
-import type { PAGSurface } from 'libpag/types/pag-surface';
+import type { BackendContext } from 'libpag/types/web/src/core/backend-context';
+import type { PAGFile } from 'libpag/types/web/src/pag-file';
+import type { PAGPlayer } from 'libpag/types/web/src/pag-player';
+import type { PAGSurface } from 'libpag/types/web/src/pag-surface';
 
 export default class PAGResource extends Resource {
   private PAG: PAGTypes.PAG;

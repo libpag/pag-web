@@ -1,10 +1,10 @@
 import './App.css';
 import { useEffect } from 'react';
-import { PAGInit } from 'libpag';
+const PAG = require('libpag');
 
 function App() {
   useEffect(() => {
-    PAGInit().then((PAG) => {
+      PAG.PAGInit().then((PAG) => {
       const url = './like.pag';
       fetch(url)
         .then((response) => response.arrayBuffer())

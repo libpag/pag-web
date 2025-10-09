@@ -13,4 +13,11 @@ export default defineConfig({
     }),
   ],
   base: './',
+  build: {
+    target: 'es2020'
+  },
+  optimizeDeps: {
+    exclude: ['libpag']
+  },
+  assetsInclude: ['**/*.wasm'],
 });

@@ -12,7 +12,7 @@ window.onload = async () => {
   document.getElementById('box')?.appendChild(app.view);
   const PAG = await PAGInit();
   const buffer = await fetch('./snowman.pag').then((res) => res.arrayBuffer());
-  const pagFile = await PAG.PAGFile.loadFromBuffer(buffer);
+  const pagFile = PAG.PAGFile.loadFromBuffer(buffer);
   const pagResource = new PAGResource(PAG, pagFile);
   const baseTexture = new PIXI.BaseTexture(pagResource);
   const texture = new PIXI.Texture(baseTexture);
